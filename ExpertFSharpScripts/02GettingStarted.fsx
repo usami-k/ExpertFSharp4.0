@@ -1,6 +1,4 @@
-﻿let splitAtSpaces (text: string) =
-    text.Split ' '
-    |> Array.toList
+﻿let splitAtSpaces (text : string) = text.Split ' ' |> Array.toList
 
 let wordCount text =
     let words = splitAtSpaces text
