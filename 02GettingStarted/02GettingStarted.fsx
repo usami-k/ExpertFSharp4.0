@@ -25,3 +25,11 @@ let http (url : string) =
     let html = reader.ReadToEnd()
     resp.Close()
     html
+
+// Using packages
+
+#r "packages/System.Net.Http/lib/net46/System.Net.Http.dll"
+
+open System.Net.Http
+
+let client = new HttpClient()
