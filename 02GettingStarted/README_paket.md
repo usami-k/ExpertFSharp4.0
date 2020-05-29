@@ -25,3 +25,11 @@ Run `paket install`.
 ```
 dotnet paket install
 ```
+
+## Using packages
+
+For example, in fsx (F# script) file:
+
+```
+#r "packages/path/to/package.dll"
+```
