@@ -33,3 +33,9 @@ let http (url : string) =
 open System.Net.Http
 
 let client = new HttpClient()
+let fetchContentAsync (url : string) =
+    async { let! res = client.GetAsync(url) |> Async.AwaitTask
+            let! content = res.Content.ReadAsStringAsync() |> Async.AwaitTask
+            return content }
+
+// To execute : fetchContentAsync ("http://example.com/") |> Async.RunSynchronously
