@@ -39,3 +39,19 @@ let fetchContentAsync (url : string) =
             return content }
 
 // To execute : fetchContentAsync ("http://example.com/") |> Async.RunSynchronously
+
+// Accessing External Data Using F# Packages
+
+#r "packages/FSharp.Data/lib/net45/FSharp.Data.dll"
+
+open FSharp.Data
+
+type Species = HtmlProvider<"https://en.wikipedia.org/wiki/The_world's_100_most_threatened_species">
+
+let species =
+    [ for x in Species.GetSample().Tables.``Species list``.Rows -> x.Type, x.``Common name`` ]
+
+let speciesSorted =
+    species
+    |> List.countBy fst
+    |> List.sortByDescending snd
