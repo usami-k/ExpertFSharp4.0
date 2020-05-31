@@ -55,3 +55,18 @@ let speciesSorted =
     species
     |> List.countBy fst
     |> List.sortByDescending snd
+
+// Starting a Web Server and Serving Data using F# Packages
+
+#r "packages/Suave/lib/net461/Suave.dll"
+
+open Suave
+
+let html =
+    [ yield "<html><body><ul>"
+      for (category, count) in speciesSorted do
+          yield sprintf "<li>Category <b>%s</b>: <b>%d</b></li>" category count
+      yield "</ul></body></html>" ]
+    |> String.concat "\n"
+
+startWebServer defaultConfig (Successful.OK html)
