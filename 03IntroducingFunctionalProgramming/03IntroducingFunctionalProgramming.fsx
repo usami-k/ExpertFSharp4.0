@@ -19,5 +19,5 @@ let rec even2 num =
     else odd2 (num - 1u)
 
 and odd2 num =
-    if num <> 0u then even2 (num - 1u)
-    else false
+    if num = 0u then false
+    else even2 (num - 1u)
