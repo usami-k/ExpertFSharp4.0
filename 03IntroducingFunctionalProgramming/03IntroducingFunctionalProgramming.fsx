@@ -23,3 +23,33 @@ and odd2 num =
     else false
 //  if num = 0u then false
 //  else even2 (num - 1u)
+
+// Getting Started with Pattern Matching
+
+let printFirst xs =
+    match xs with
+    | head :: _ -> printfn "The first item in the list is %A" head
+    | [] -> printfn "No items in the list"
+
+let people =
+    [ ("Adam", None)
+      ("Eve", None)
+      ("Cain", Some("Adam", "Eve"))
+      ("Abel", Some("Adam", "Eve")) ]
+
+let showParents (name, parents) =
+    match parents with
+    | Some(dad, mum) -> printfn "%s has father %s and mother %s" name dad mum
+    | None -> printfn "%s has no parents!" name
+
+let urlFilter url agent =
+    match url, agent with
+    | "http://www.control.org", 86 -> true
+    | "http://www.kaos.org", _ -> false
+    | _ -> failwith "unexpected input"
+
+let sign num =
+    match num with
+    | _ when num < 0 -> -1
+    | _ when num > 0 -> 1
+    | _ -> 0
