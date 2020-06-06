@@ -77,3 +77,24 @@ let fetch url = (url, http url)
 let resultsOfFetch = List.map fetch urls
 
 let lengthsOfFetch = List.map (fun (_, p) -> String.length p) resultsOfFetch
+
+// Computing with Collection Functions
+
+let delimiters = [| ' '; '\n'; '\t'; '<'; '>'; '=' |]
+
+let getWords (s : string) = s.Split delimiters
+
+let getStats site =
+    let url = "http://" + site
+    let html = http url
+    let hwords = html |> getWords
+
+    let hrefs =
+        html
+        |> getWords
+        |> Array.filter (fun s -> s = "href")
+    (site, html.Length, hwords.Length, hrefs.Length)
+
+let sites = [ "www.bing.com"; "www.google.com" ]
+
+let stats = sites |> List.map getStats
