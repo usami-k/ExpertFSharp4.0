@@ -1,4 +1,18 @@
-﻿// Defining Recursive Functions
+﻿// definition of http function from Chapter 2
+
+open System.IO
+open System.Net
+
+let http (url : string) =
+    let req = WebRequest.Create(url)
+    let resp = req.GetResponse()
+    let stream = resp.GetResponseStream()
+    let reader = new StreamReader(stream)
+    let html = reader.ReadToEnd()
+    resp.Close()
+    html
+
+// Defining Recursive Functions
 
 let rec factorial num =
     if num <= 1 then 1
@@ -53,3 +67,13 @@ let sign num =
     | _ when num < 0 -> -1
     | _ when num > 0 -> 1
     | _ -> 0
+
+// Introducing Function Values
+
+let urls = [ "http://www.bing.com"; "http://www.google.com" ]
+
+let fetch url = (url, http url)
+
+let resultsOfFetch = List.map fetch urls
+
+let lengthsOfFetch = List.map (fun (_, p) -> String.length p) resultsOfFetch
