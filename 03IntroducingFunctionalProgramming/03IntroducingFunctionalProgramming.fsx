@@ -106,3 +106,24 @@ let (|>) x f = f x
 [ 1; 2; 3 ] |> List.map (fun x -> x * x)
 
 List.map (fun x -> x * x) [ 1; 2; 3 ]
+
+// Composing Functions with >>
+
+let (>>) f g x = g (f (x))
+
+let composedFunc = List.map (fun x -> x * x) >> List.map (fun x -> x + 1)
+
+[ 1; 2; 3 ] |> composedFunc
+
+[ 1; 2; 3 ]
+|> List.map (fun x -> x * x)
+|> List.map (fun x -> x + 1)
+
+let google = http "http://www.google.com"
+
+let counterLinks =
+    getWords
+    >> Array.filter (fun s -> s = "href")
+    >> Array.length
+
+google |> counterLinks
