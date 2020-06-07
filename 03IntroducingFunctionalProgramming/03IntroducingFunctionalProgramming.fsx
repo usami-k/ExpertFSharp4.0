@@ -98,3 +98,11 @@ let getStats site =
 let sites = [ "www.bing.com"; "www.google.com" ]
 
 let stats = sites |> List.map getStats
+
+// Pipelining with |>
+
+let (|>) x f = f x
+
+[ 1; 2; 3 ] |> List.map (fun x -> x * x)
+
+List.map (fun x -> x * x) [ 1; 2; 3 ]
