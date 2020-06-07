@@ -127,3 +127,18 @@ let counterLinks =
     >> Array.length
 
 google |> counterLinks
+
+// Building Functions with Partial Application
+
+let shift (dx, dy) (x, y) = (x + dx, y + dy)
+
+let shiftRight = shift (1, 0)
+let shiftUp = shift (0, 1)
+let shiftLeft = shift (-1, 0)
+let shiftDown = shift (0, -1)
+
+[ (0, 0)
+  (1, 0)
+  (1, 1)
+  (0, 1) ]
+|> List.map shiftRight
