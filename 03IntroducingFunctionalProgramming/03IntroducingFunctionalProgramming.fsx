@@ -142,3 +142,24 @@ let shiftDown = shift (0, -1)
   (1, 1)
   (0, 1) ]
 |> List.map shiftRight
+
+// Using Local Functions
+
+open System.Drawing
+
+let remap (r1 : RectangleF) (r2 : RectangleF) =
+    let scalex = r2.Width / r1.Width
+    let scaley = r2.Height / r1.Height
+    let mapx x = r2.Left + (x - r1.Left) * scalex
+    let mapy y = r2.Top + (y - r1.Top) * scaley
+    let mapp (p : PointF) = PointF(mapx p.X, mapy p.Y)
+    mapp
+
+let rect1 = RectangleF(100.0f, 100.0f, 100.0f, 100.0f)
+let rect2 = RectangleF(50.0f, 50.0f, 200.0f, 200.0f)
+
+let mapp = remap rect1 rect2
+
+let remapped1 = mapp (PointF(100.0f, 100.0f))
+let remapped2 = mapp (PointF(150.0f, 50.0f))
+let remapped3 = mapp (PointF(200.0f, 150.0f))
