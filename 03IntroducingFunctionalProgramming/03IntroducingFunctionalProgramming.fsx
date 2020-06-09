@@ -168,3 +168,15 @@ let remapped3 = mapp (PointF(200.0f, 150.0f))
 
 [ "http://www.bing.com"; "http://www.google.com" ]
 |> List.iter (fun site -> printfn "%s, length %d" site (http site).Length)
+
+// Abstracting Control with Functions
+
+open System
+
+let time f =
+    let start = DateTime.Now
+    let res = f()
+    let finish = DateTime.Now
+    (res, finish - start)
+
+time (fun () -> http "http://www.bing.com")
