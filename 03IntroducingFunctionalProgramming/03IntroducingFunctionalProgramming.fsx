@@ -163,3 +163,8 @@ let mapp = remap rect1 rect2
 let remapped1 = mapp (PointF(100.0f, 100.0f))
 let remapped2 = mapp (PointF(150.0f, 50.0f))
 let remapped3 = mapp (PointF(200.0f, 150.0f))
+
+// Iterating with Functions
+
+[ "http://www.bing.com"; "http://www.google.com" ]
+|> List.iter (fun site -> printfn "%s, length %d" site (http site).Length)
