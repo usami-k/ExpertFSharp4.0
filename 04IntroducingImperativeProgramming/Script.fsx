@@ -62,3 +62,11 @@ let cell2 = cell1
 
 cell1.data <- 7
 cell2 // val it : Cell = { data = 7 }
+
+// Using Mutable let Bindings
+
+let sum m n =
+    let mutable res = 0
+    for i = m to n do
+        res <- res + i
+    res
