@@ -51,3 +51,14 @@ let fetch url =
     let page = http url
     recordEvent longPageCounter (page.Length > 10000)
     page
+
+// Avoiding Aliasing
+
+type Cell =
+    { mutable data : int }
+
+let cell1 = { data = 3 }
+let cell2 = cell1
+
+cell1.data <- 7
+cell2 // val it : Cell = { data = 7 }
