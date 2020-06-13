@@ -70,3 +70,11 @@ let sum m n =
     for i = m to n do
         res <- res + i
     res
+
+// Hiding Mutable Data
+
+let generateStamp =
+    let mutable count = 0
+    (fun () ->
+    count <- count + 1
+    count)
