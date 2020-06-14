@@ -105,3 +105,24 @@ let arr2 =
 arr2.[1].[0]
 arr2.[1].[0] <- 7
 arr2 // val it : int [] [] = [|[|1; 2; 3|]; [|7; 5; 6|]|]
+
+// Introducing the Imperative .NET Collections
+// Using Resizable Arrays
+
+type ResizableArray<'T> = System.Collections.Generic.List<'T>
+
+let names = new ResizableArray<string>()
+
+for name in [ "Claire"; "Sophie"; "Jane" ] do
+    names.Add(name)
+
+names.Count
+names.[0]
+
+let squares =
+    new ResizableArray<int>(seq {
+                                for i in 0..100 -> i * i
+                            })
+
+squares.Count
+squares.[100]
