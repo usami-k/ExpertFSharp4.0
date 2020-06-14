@@ -78,3 +78,30 @@ let generateStamp =
     (fun () ->
     count <- count + 1
     count)
+
+// Working with Arrays
+
+let arr0 = [| 1.0; 1.0; 1.0 |]
+
+arr0.[1]
+arr0.[1] <- 3.0
+arr0 // val it : float [] = [|1.0; 3.0; 1.0|]
+
+// Generating and Slicing Arrays
+
+let arr1 =
+    [| for i in 0..5 -> (i, i * i) |]
+
+arr1.[1..3]
+arr1.[..2]
+arr1.[3..]
+
+// Two-Dimensional Arrays
+
+let arr2 =
+    [| [| 1; 2; 3 |]
+       [| 4; 5; 6 |] |]
+
+arr2.[1].[0]
+arr2.[1].[0] <- 7
+arr2 // val it : int [] [] = [|[|1; 2; 3|]; [|7; 5; 6|]|]
