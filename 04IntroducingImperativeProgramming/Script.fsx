@@ -126,3 +126,33 @@ let squares =
 
 squares.Count
 squares.[100]
+
+// Using Dictionaries
+
+open System.Collections.Generic
+
+let capitals = new Dictionary<string, string>(HashIdentity.Structural)
+
+capitals.["USA"] <- "Washington"
+capitals.["Bangladesh"] <- "Dhaka"
+capitals.ContainsKey("USA")
+capitals.ContainsKey("Australia")
+capitals.Keys
+capitals.["USA"]
+for kvp in capitals do
+    printfn "%s has capital %s" kvp.Key kvp.Value
+
+let lookupName nm (dict : Dictionary<string, string>) =
+    let mutable res = ""
+    let foundIt = dict.TryGetValue(nm, &res)
+    if foundIt then res
+    else failwithf "Didn't find %s" nm
+
+capitals |> lookupName "USA"
+capitals |> lookupName "Australia"
+
+let sparseMap = new Dictionary<int * int, float>()
+
+sparseMap.[(0, 2)] <- 4.0
+sparseMap.[(1021, 1847)] <- 9.0
+sparseMap.Keys
