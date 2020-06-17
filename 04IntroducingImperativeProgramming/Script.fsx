@@ -156,3 +156,36 @@ let sparseMap = new Dictionary<int * int, float>()
 sparseMap.[(0, 2)] <- 4.0
 sparseMap.[(1021, 1847)] <- 9.0
 sparseMap.Keys
+
+// Having an Effect : Basic I/O
+
+open System.IO
+
+let tmpFile = Path.Combine(__SOURCE_DIRECTORY__, "temp.txt")
+
+File.WriteAllLines(tmpFile, [| "This is a test file."; "It is easy to read" |])
+seq {
+    for line in File.ReadLines tmpFile do
+        let words = line.Split [| ' ' |]
+        if words.Length > 3 && words.[2] = "easy" then yield line
+}
+
+// .NET I/O via Streams
+
+let playlistFile = Path.Combine(__SOURCE_DIRECTORY__, "playlist.txt")
+let outp = File.CreateText playlistFile
+
+outp.WriteLine "Enchanted"
+outp.WriteLine "Put your records on"
+outp.Close()
+
+let inp = File.OpenText playlistFile
+
+inp.ReadLine()
+inp.ReadLine()
+inp.Close()
+
+// Using System.Console
+
+System.Console.WriteLine "Hello World"
+System.Console.ReadLine()
