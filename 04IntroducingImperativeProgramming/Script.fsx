@@ -189,3 +189,13 @@ inp.Close()
 
 System.Console.WriteLine "Hello World"
 System.Console.ReadLine()
+
+// Precomputation and Partial Application
+
+let isWord (words : string list) =
+    let wordTable = Set.ofList words
+    fun w -> wordTable.Contains(w)
+
+let isCapital = isWord [ "London"; "Paris"; "Warsaw"; "Tokyo" ]
+
+let isCapitalSlow word = isWord [ "London"; "Paris"; "Warsaw"; "Tokyo" ] word
