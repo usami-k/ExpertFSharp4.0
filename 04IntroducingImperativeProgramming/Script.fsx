@@ -199,3 +199,13 @@ let isWord (words : string list) =
 let isCapital = isWord [ "London"; "Paris"; "Warsaw"; "Tokyo" ]
 
 let isCapitalSlow word = isWord [ "London"; "Paris"; "Warsaw"; "Tokyo" ] word
+
+// Precomputation and Objects
+
+type NameLookupService =
+    abstract Contains : string -> bool
+
+let buildSimpleNameLookup (words : string list) =
+    let wordTable = HashSet<_> words
+    { new NameLookupService with
+        member t.Contains w = wordTable.Contains w }
