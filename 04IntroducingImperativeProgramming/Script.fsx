@@ -209,3 +209,23 @@ let buildSimpleNameLookup (words : string list) =
     let wordTable = HashSet<_> words
     { new NameLookupService with
         member t.Contains w = wordTable.Contains w }
+
+// Memoizing Computations
+
+let rec fib n =
+    if n <= 2 then 1
+    else fib (n - 1) + fib (n - 2)
+
+let memoize (f : 'T -> 'U) =
+    let t = new System.Collections.Generic.Dictionary<'T, 'U>(HashIdentity.Structural)
+    fun n ->
+        if t.ContainsKey n then t.[n]
+        else
+            let res = f n
+            t.Add(n, res)
+            res
+
+let rec fibFast =
+    memoize (fun n ->
+        if n <= 2 then 1
+        else fibFast (n - 1) + fibFast (n - 2))
