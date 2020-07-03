@@ -231,3 +231,28 @@ let rec fibFast =
     memoize (fun n ->
         if n <= 2 then 1
         else fibFast (n - 1) + fibFast (n - 2))
+
+// Generic memoization service
+
+type Table<'T, 'U> =
+    abstract Item : 'T -> 'U with get
+    abstract Discard : unit -> unit
+
+let memoizeAndPermitDiscard f =
+    let lookasideTable = new System.Collections.Generic.Dictionary<_, _>(HashIdentity.Structural)
+    { new Table<'T, 'U> with
+
+        member t.Item
+            with get (n) =
+                if lookasideTable.ContainsKey(n) then lookasideTable.[n]
+                else
+                    let res = f n
+                    lookasideTable.Add(n, res)
+                    res
+
+        member t.Discard() = lookasideTable.Clear() }
+
+let rec fibFast2 =
+    memoizeAndPermitDiscard (fun n ->
+        if n <= 2 then 1
+        else fibFast2.[n - 1] + fibFast2.[n - 2])
