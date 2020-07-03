@@ -210,6 +210,8 @@ let buildSimpleNameLookup (words : string list) =
     { new NameLookupService with
         member t.Contains w = wordTable.Contains w }
 
+#nowarn "40"
+
 // Memoizing Computations
 
 let rec fib n =
