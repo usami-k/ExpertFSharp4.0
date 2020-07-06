@@ -256,3 +256,17 @@ let rec fibFast2 =
     memoizeAndPermitDiscard (fun n ->
         if n <= 2 then 1
         else fibFast2.[n - 1] + fibFast2.[n - 2])
+
+// Lazy Values
+
+let sixty = lazy (30 + 30)
+
+sixty.Force()
+
+let sixtyWithSideEffect =
+    lazy
+        (printfn "Hello world"
+         30 + 30)
+
+sixtyWithSideEffect.Force() // output "Hello world"
+sixtyWithSideEffect.Force() // no output
