@@ -270,3 +270,11 @@ let sixtyWithSideEffect =
 
 sixtyWithSideEffect.Force() // output "Hello world"
 sixtyWithSideEffect.Force() // no output
+
+// Mutable Reference Cells
+
+let cell = ref 1
+
+cell.Value
+cell := 3
+cell.Value
