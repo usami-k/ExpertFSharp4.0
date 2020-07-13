@@ -22,3 +22,22 @@ let factorizeRecursive n =
         elif (n % i = 0) then Some(i, n / i)
         else find (i + 1)
     find 2
+
+// Separating Mutable Data Structures
+
+open System.Collections.Generic
+
+let divideIntoEquivalenceClasses keyf seq =
+    let dict = new Dictionary<'key, ResizeArray<'T>>()
+    seq
+    |> Seq.iter (fun v ->
+        let key = keyf v
+        let ok, prev = dict.TryGetValue(key)
+        if ok then prev.Add(v)
+        else
+            let prev = new ResizeArray<'T>()
+            dict.[key] <- prev
+            prev.Add(v))
+    dict |> Seq.map (fun group -> group.Key, Seq.readonly group.Value)
+
+divideIntoEquivalenceClasses (fun n -> n % 3) [ 0..10 ]
