@@ -20,3 +20,41 @@ let don =
 let peter =
     [ Car("Ford", "Fiesta")
       Bicycle ]
+
+let averageSpeed (tr: Transport) =
+    match tr with
+    | Car _ -> 35
+    | Bicycle -> 16
+    | Bus _ -> 24
+
+type Proposition =
+    | True
+    | And of Proposition * Proposition
+    | Or of Proposition * Proposition
+    | Not of Proposition
+
+let rec eval (p: Proposition) =
+    match p with
+    | True -> true
+    | And (p1, p2) -> eval p1 && eval p2
+    | Or (p1, p2) -> eval p1 || eval p2
+    | Not p1 -> not (eval p1)
+
+type 'T option =
+    | None
+    | Some of 'T
+
+type 'T list =
+    | op_Nil
+    | op_ColonColon of 'T * 'T list
+
+type Tree<'T> =
+    | Tree of 'T * Tree<'T> * Tree<'T>
+    | Tip of 'T
+
+let rec sizeOfTree tree =
+    match tree with
+    | Tree (_, l, r) -> 1 + sizeOfTree l + sizeOfTree r
+    | Tip _ -> 1
+
+let smallTree = Tree("1", Tree("2", Tip "a", Tip "b"), Tip "c")
