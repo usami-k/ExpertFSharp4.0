@@ -58,3 +58,14 @@ let rec sizeOfTree tree =
     | Tip _ -> 1
 
 let smallTree = Tree("1", Tree("2", Tip "a", Tip "b"), Tip "c")
+
+// Using Discriminated Unions as Records
+
+type Point3D = Vector3D of float * float * float
+
+let origin = Vector3D(0., 0., 0.)
+let unitX = Vector3D(1., 0., 0.)
+let unitY = Vector3D(0., 1., 0.)
+let unitZ = Vector3D(0., 0., 1.)
+
+let length (Vector3D (dx, dy, dz)) = sqrt (dx * dx + dy * dy + dz * dz)
