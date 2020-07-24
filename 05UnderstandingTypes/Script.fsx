@@ -69,3 +69,9 @@ let unitY = Vector3D(0., 1., 0.)
 let unitZ = Vector3D(0., 0., 1.)
 
 let length (Vector3D (dx, dy, dz)) = sqrt (dx * dx + dy * dy + dz * dz)
+
+// Writing Generic Functions
+
+let getFirst (a, b, c) = a
+
+let mapPair f g (x, y) = (f x, g y)
