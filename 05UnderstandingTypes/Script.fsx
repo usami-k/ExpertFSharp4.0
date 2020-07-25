@@ -75,3 +75,16 @@ let length (Vector3D (dx, dy, dz)) = sqrt (dx * dx + dy * dy + dz * dz)
 let getFirst (a, b, c) = a
 
 let mapPair f g (x, y) = (f x, g y)
+
+// Generic Comparison (Structural Comparison)
+
+("abc", "def") < ("abc", "xyz")
+compare (10, 30) (10, 20)
+compare [ 10, 30 ] [ 10, 20 ]
+compare [| 10, 30 |] [| 10, 20 |]
+
+// Generic Hashing
+
+hash 100
+hash "abc"
+hash (100, "abc")
