@@ -88,3 +88,21 @@ compare [| 10, 30 |] [| 10, 20 |]
 hash 100
 hash "abc"
 hash (100, "abc")
+
+// Generic Algorithms through Explicit Arguments
+
+let rec hcf a b =
+    if a = 0 then b
+    elif a < b then hcf a (b - a)
+    else hcf (a - b) b
+
+let hcfGeneric (zero, sub, lessThan) =
+    let rec hcf a b =
+        if a = zero then b
+        elif lessThan a b then hcf a (sub b a)
+        else hcf (sub a b) b
+    hcf
+
+let hcfInt = hcfGeneric (0, (-), (<))
+let hcfInt64 = hcfGeneric (0L, (-), (<))
+let hcfBigInt = hcfGeneric (0I, (-), (<))
